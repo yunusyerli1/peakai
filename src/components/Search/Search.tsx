@@ -14,6 +14,12 @@ const Search: React.FC = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
+  };
+
   return (
     <div className="search-wrapper">
       <form 
@@ -32,6 +38,7 @@ const Search: React.FC = () => {
             className="search-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Search GitHub repositories..."
             aria-label="Search GitHub repositories"
             aria-required="true"
