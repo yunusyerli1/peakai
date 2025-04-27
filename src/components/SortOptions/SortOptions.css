@@ -1,0 +1,39 @@
+.sort-options {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.sort-label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.sort-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.sort-button:hover {
+  background-color: #f0f0f0;
+}
+
+.sort-button.active {
+  background-color: #0366d6;
+  color: white;
+  border-color: #0366d6;
+}
+
+.sort-button.active:hover {
+  background-color: #0356b6;
+} 

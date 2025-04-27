@@ -1,0 +1,33 @@
+.header {
+    background-color: #24292e;
+    padding: 1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .logo {
+    margin: 0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    padding: 0;
+    text-decoration: none;
+    outline: none;
+  }
+  
+  .logo:hover,
+  .logo:focus {
+    opacity: 0.8;
+  }
+  
+  .logo:focus-visible {
+    outline: 2px solid #0366d6;
+    outline-offset: 2px;
+  }

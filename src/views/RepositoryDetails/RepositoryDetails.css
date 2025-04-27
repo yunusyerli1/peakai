@@ -1,0 +1,219 @@
+.repository-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #0366d6;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+.repository-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.repository-info h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.repository-link {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.repository-link:hover {
+  text-decoration: underline;
+}
+
+.owner {
+  margin: 0.5rem 0 0;
+  color: #666;
+}
+
+.owner-link {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.owner-link:hover {
+  text-decoration: underline;
+}
+
+.description-section {
+  margin-bottom: 2rem;
+}
+
+.description-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #24292e;
+}
+
+.description-section p {
+  color: #444;
+  line-height: 1.5;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #24292e;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.detail-section h2 {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.language-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #f1e05a;
+  display: inline-block;
+}
+
+.no-language,
+.no-license {
+  color: #666;
+  font-style: italic;
+}
+
+.license-link {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.license-link:hover {
+  text-decoration: underline;
+}
+
+.homepage-section {
+  margin-bottom: 2rem;
+}
+
+.homepage-section h2 {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.homepage-link {
+  color: #0366d6;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.homepage-link:hover {
+  text-decoration: underline;
+}
+
+.topics-section {
+  margin-bottom: 2rem;
+}
+
+.topics-section h2 {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.topics-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.topic-tag {
+  background: #f1f8ff;
+  color: #0366d6;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #0366d6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-icon {
+  font-size: 2rem;
+} 

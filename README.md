@@ -1,46 +1,85 @@
-# Getting Started with Create React App
+# PeakAI GitHub Repository Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application for exploring GitHub repositories with a focus on accessibility and user experience.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Search GitHub repositories
+- View repository details
+- Pagination support
+- Sorting options
+- Responsive design
+- Accessibility features
+- TypeScript support
+- Error handling
+- Loading states
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone the repository:
+```bash
+git clone https://github.com/yunusyerli1/peakai.git
+cd peakai
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
 
-### `npm test`
+## Running the Application
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To start the development server:
+```bash
+npm start
+# or
+yarn start
+```
 
-### `npm run build`
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running Tests
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To run the test suite:
+```bash
+npm test
+# or
+yarn test
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Project Structure
 
-### `npm run eject`
+```
+src/
+├── components/         # Reusable UI components
+│   ├── Header/        # Header component with navigation
+│   ├── Search/        # Search input component
+│   ├── SortOptions/   # Repository sorting options
+│   └── Pagination/    # Pagination controls
+├── context/           # React Context for state management
+├── types/             # TypeScript type definitions
+├── views/             # Page components
+│   ├── Layout/        # Main layout component
+│   ├── RepositoryList/# Repository list view
+│   └── RepositoryDetails/ # Repository details view
+└── utils/             # Utility functions and API calls
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Architectural Decisions
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Component Structure
+- **Atomic Design**: Components are organized following atomic design principles
+- **Separation of Concerns**: Clear separation between presentational and container components
+- **Reusability**: Components are designed to be reusable and composable
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### State Management
+- **React Context**: Used for global state management (repository data, search queries, pagination)
+- **Local State**: Component-specific state managed with React hooks
+- **Type Safety**: Full TypeScript support for better type checking and developer experience
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Styling Approach
+- **CSS Modules**: Used for component-specific styles
+- **Responsive Design**: Mobile-first approach with media queries
+- **Accessibility**: Semantic HTML and ARIA attributes for better accessibility
