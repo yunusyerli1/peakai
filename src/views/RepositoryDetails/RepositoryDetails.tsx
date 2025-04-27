@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { GitHubRepositoryDetails } from '../../types/github';
 import './RepositoryDetails.css';
@@ -13,28 +13,30 @@ const RepositoryDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState(!location.state?.repository);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Only fetch additional details if we don't have them
-    if (!repository?.forks_count) {
-      const fetchRepositoryDetails = async () => {
-        try {
-          const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch repository details');
-          }
-          const data = await response.json();
-          setRepository(data);
-        } catch (err) {
-          setError('An error occurred while fetching repository details');
-          console.error('Error:', err);
-        } finally {
-          setIsLoading(false);
-        }
-      };
+  const fetchRepositoryDetails = useCallback(async () => {
+    if (!owner || !repo) return;
+    
+    try {
+      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch repository details');
+      }
+      const data = await response.json();
+      setRepository(data);
+    } catch (err) {
+      setError('An error occurred while fetching repository details');
+      console.error('Error:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [owner, repo]);
 
+  useEffect(() => {
+    // Only fetch if we don't have the repository data or if we're missing required fields
+    if (!repository || !repository.forks_count) {
       fetchRepositoryDetails();
     }
-  }, [owner, repo, repository]);
+  }, [fetchRepositoryDetails, repository]);
 
   if (isLoading) {
     return (

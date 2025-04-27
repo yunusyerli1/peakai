@@ -15,19 +15,41 @@ const Search: React.FC = () => {
   };
 
   return (
-    <form className="search-container" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className="search-input"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search GitHub repositories..."
-        aria-label="Search"
-      />
-      <button type="submit" className="search-button">
-        Search
-      </button>
-    </form>
+    <div className="search-wrapper">
+      <form 
+        className="search-container" 
+        onSubmit={handleSubmit}
+        role="search"
+        aria-label="GitHub repository search"
+      >
+        <div className="search-input-wrapper">
+          <label htmlFor="search-input" className="visually-hidden">
+            Search GitHub repositories
+          </label>
+          <input
+            id="search-input"
+            type="text"
+            className="search-input"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search GitHub repositories..."
+            aria-label="Search GitHub repositories"
+            aria-required="true"
+            aria-describedby="search-description"
+          />
+          <span id="search-description" className="visually-hidden">
+            Enter a search term to find GitHub repositories
+          </span>
+        </div>
+        <button 
+          type="submit" 
+          className="search-button"
+          aria-label="Submit search"
+        >
+          Search
+        </button>
+      </form>
+    </div>
   );
 };
 

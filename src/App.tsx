@@ -12,18 +12,27 @@ function App() {
     <RepositoryProvider>
       <Router>
         <Layout>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="App">
-                  <Search />
-                  <RepositoryList />
-                </div>
-              }
-            />
-            <Route path="/repository/:owner/:repo" element={<RepositoryDetails />} />
-          </Routes>
+          <main>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <div className="App" role="main">
+                    <Search />
+                    <RepositoryList />
+                  </div>
+                }
+              />
+              <Route 
+                path="/repository/:owner/:repo" 
+                element={
+                  <div role="main">
+                    <RepositoryDetails />
+                  </div>
+                } 
+              />
+            </Routes>
+          </main>
         </Layout>
       </Router>
     </RepositoryProvider>

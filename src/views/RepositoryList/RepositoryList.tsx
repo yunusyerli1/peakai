@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRepository } from '../../context/RepositoryContext';
 import { GitHubRepository, GitHubSearchResponse } from '../../types/github';
@@ -14,7 +14,7 @@ const RepositoryList: React.FC = () => {
   const itemsPerPage = 10;
   const totalPages = totalCount ? Math.ceil(totalCount / itemsPerPage) : 0;
 
-  const fetchRepositories = async (page: number) => {
+  const fetchRepositories = useCallback(async (page: number) => {
     if (!currentQuery) return;
 
     dispatch({ type: 'SET_LOADING', payload: true });
@@ -53,13 +53,13 @@ const RepositoryList: React.FC = () => {
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
     }
-  };
+  }, [currentQuery, sortBy, sortOrder, itemsPerPage, dispatch]);
 
   useEffect(() => {
     if (currentQuery) {
       fetchRepositories(currentPage);
     }
-  }, [currentPage, currentQuery, sortBy, sortOrder]);
+  }, [currentPage, currentQuery, sortBy, sortOrder, fetchRepositories]);
 
   const handleRepositoryClick = (repo: GitHubRepository) => {
     navigate(`/repository/${repo.owner.login}/${repo.name}`, { state: { repository: repo } });
@@ -71,8 +71,8 @@ const RepositoryList: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="loading-state">
-        <div className="loading-spinner"></div>
+      <div className="loading-state" role="status" aria-live="polite">
+        <div className="loading-spinner" aria-hidden="true"></div>
         <div>Loading repositories...</div>
       </div>
     );
@@ -80,8 +80,8 @@ const RepositoryList: React.FC = () => {
 
   if (error) {
     return (
-      <div className="error-state">
-        <div className="error-icon">⚠️</div>
+      <div className="error-state" role="alert">
+        <div className="error-icon" aria-hidden="true">⚠️</div>
         <div>Error: {error}</div>
       </div>
     );
@@ -89,8 +89,8 @@ const RepositoryList: React.FC = () => {
 
   if (repositories.length === 0) {
     return (
-      <div className="empty-state">
-        <div className="empty-icon">📁</div>
+      <div className="empty-state" role="status">
+        <div className="empty-icon" aria-hidden="true">📁</div>
         <div>No repositories found</div>
         <div className="empty-subtext">Try searching for something else</div>
       </div>
@@ -99,22 +99,31 @@ const RepositoryList: React.FC = () => {
 
   return (
     <div className="repository-container">
-      <div className="results-count">
+      <div className="results-count" role="status" aria-live="polite">
         Found {totalCount} repositories
       </div>
       <SortOptions />
-      <div className="repository-list">
+      <div className="repository-list" role="list">
         {repositories.map((repo) => (
           <div
             key={repo.id}
             className="repository-card"
             onClick={() => handleRepositoryClick(repo)}
+            role="listitem"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                handleRepositoryClick(repo);
+              }
+            }}
           >
             <div className="repository-header">
               <img
                 src={repo.owner.avatar_url}
                 alt={`${repo.owner.login}'s avatar`}
                 className="avatar"
+                width="40"
+                height="40"
               />
               <div className="repository-info">
                 <h3>
@@ -124,6 +133,7 @@ const RepositoryList: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
+                    aria-label={`View ${repo.name} on GitHub (opens in new tab)`}
                   >
                     {repo.name}
                   </a>
@@ -134,12 +144,13 @@ const RepositoryList: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
+                  aria-label={`View ${repo.owner.login}'s profile on GitHub (opens in new tab)`}
                 >
                   <span className="owner">{repo.owner.login}</span>
                 </a>
               </div>
-              <div className="stars">
-                <span className="star-icon">⭐</span>
+              <div className="stars" aria-label={`${repo.stargazers_count} stars`}>
+                <span className="star-icon" aria-hidden="true">⭐</span>
                 {repo.stargazers_count}
               </div>
             </div>
@@ -147,8 +158,10 @@ const RepositoryList: React.FC = () => {
             <div className="repository-stats">
               {repo.language && (
                 <div className="language">
-                  <span className="language-dot"></span>
-                  {repo.language}
+                  <span className="language-dot" aria-hidden="true"></span>
+                  <span aria-label={`Primary programming language: ${repo.language}`}>
+                    {repo.language}
+                  </span>
                 </div>
               )}
             </div>
