@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRepository } from '../../context/RepositoryContext';
 import './Search.css';
 
 const Search: React.FC = () => {
   const [query, setQuery] = useState('');
-  const { dispatch } = useRepository();
+  const { state, dispatch } = useRepository();
+  const { currentQuery } = state;
+
+  useEffect(() => {
+    setQuery(currentQuery);
+  }, [currentQuery]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

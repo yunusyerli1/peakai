@@ -14,6 +14,18 @@ const RepositoryList: React.FC = () => {
   const itemsPerPage = 10;
   const totalPages = totalCount ? Math.ceil(totalCount / itemsPerPage) : 0;
 
+  const navigateHome = () => {
+    dispatch({ type: 'SET_CURRENT_QUERY', payload: '' });
+    dispatch({ type: 'SET_REPOSITORIES', payload: [] });
+    dispatch({ type: 'SET_CURRENT_PAGE', payload: 1 });
+    dispatch({ type: 'SET_TOTAL_COUNT', payload: 0 });
+    dispatch({ type: 'SET_ERROR', payload: null });
+    dispatch({ type: 'SET_SELECTED_REPOSITORY', payload: null });
+    
+    navigate('/');
+  };
+
+
   const fetchRepositories = useCallback(async (page: number) => {
     if (!currentQuery) return;
 
@@ -83,6 +95,9 @@ const RepositoryList: React.FC = () => {
       <div className="error-state" role="alert">
         <div className="error-icon" aria-hidden="true">⚠️</div>
         <div>Error: {error}</div>
+        <button onClick={navigateHome} className="home-button">
+          Go Home
+        </button>
       </div>
     );
   }

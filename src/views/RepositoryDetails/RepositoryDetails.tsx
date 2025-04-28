@@ -32,11 +32,16 @@ const RepositoryDetails: React.FC = () => {
   }, [owner, repo]);
 
   useEffect(() => {
-    // Only fetch if we don't have the repository data or if we're missing required fields
+    let mounted = true;
+    
     if (!repository || !repository.forks_count) {
       fetchRepositoryDetails();
     }
-  }, [fetchRepositoryDetails, repository]);
+
+    return () => {
+      mounted = false;
+    };
+  }, [fetchRepositoryDetails]);
 
   if (isLoading) {
     return (

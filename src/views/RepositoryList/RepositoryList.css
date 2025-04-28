@@ -151,6 +151,21 @@
   font-size: 2rem;
 }
 
+.home-button {
+  background-color: #0366d6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.home-button:hover {
+  background-color: #0356b6;
+}
+
 .empty-state {
   display: flex;
   flex-direction: column;
